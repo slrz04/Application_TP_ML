@@ -23,8 +23,7 @@ Elle utilise un modèle de Machine Learning déjà entraîné et sauvegardé dan
 
 @st.cache_resource
 def load_model():
-    with open("C:/Users/21265/ML/Model.pkl", "rb") as f:
-        model = dill.load(f)
+    model = joblib.load("Model.pkl")  # même nom que dans le script d'entraînement
     return model
 
 model = load_model()
