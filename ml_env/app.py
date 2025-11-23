@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import dill
+import joblib
 
 
 # Configuration de la page
@@ -20,6 +20,17 @@ Elle utilise un modèle de Machine Learning déjà entraîné et sauvegardé dan
 
 
 # 1. Chargement du modèle
+def clean_categorical(df):
+    cat_cols = df.select_dtypes(include=["object"]).columns
+
+    for col in cat_cols:
+        df[col] = (
+            df[col]
+            .astype(str)
+            .str.strip()  
+            .str.lower()  
+        )
+    return df
 
 @st.cache_resource
 def load_model():
